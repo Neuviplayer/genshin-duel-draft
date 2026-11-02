@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Genshin Duel Draft</title>
+<style>
+:root{--bg:#10131b;--panel:#191e2b;--panel2:#222a3b;--line:#39445c;--text:#f3f5fb;--muted:#aab4c8;--gold:#e6bd75;--blue:#76b9ff;--red:#ff8585;--green:#8be0b0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#202b40 0,#10131b 60%);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--text);padding:9px 12px}button:hover{border-color:var(--gold)}button:disabled{opacity:.35;cursor:not-allowed}
+.wrap{max-width:1500px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}.brand{display:flex;gap:12px;align-items:center}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#e6bd75,#f5e3b7);color:#222;display:grid;place-items:center;font-size:24px;font-weight:900}.eyebrow{font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}.title{font-size:26px;font-weight:850;letter-spacing:.02em}.sub{color:var(--muted);font-size:13px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,1fr);gap:16px}.panel{background:rgba(25,30,43,.94);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 12px 35px #0002}.panel h2{font-size:16px;margin:0 0 12px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.pill{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:4px 8px;color:var(--muted)}.players{display:grid;grid-template-columns:1fr 1fr;gap:12px}.player{border-radius:14px;padding:13px;background:linear-gradient(145deg,#242d40,#171c29);border:1px solid var(--line);min-width:0}.player.p1{border-top:3px solid var(--blue)}.player.p2{border-top:3px solid var(--red)}.player-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}.player-name{font-weight:800;font-size:16px}.count{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}.slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.slot{min-height:83px;border:1px dashed #4a5670;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5px;background:#111621}.slot.filled{border-style:solid;background:#2a3448}.portrait{font-size:25px;line-height:1.2}.slot-name{font-size:11px;margin-top:5px;overflow-wrap:anywhere}.slot-meta{font-size:10px;color:var(--muted)}.bans{display:flex;flex-wrap:wrap;gap:6px;min-height:32px}.ban-chip{border:1px solid #774c58;background:#3c252f;border-radius:8px;padding:5px 7px;font-size:11px;color:#ffd5d5}.status{margin-top:12px;padding:10px 12px;border-radius:10px;background:#111621;border:1px solid var(--line);color:var(--gold);font-weight:700}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.filters{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:8px;margin-bottom:10px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:11px;color:var(--muted)}input,select{min-width:0;width:100%;background:#101621;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px}.roster{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;max-height:520px;overflow:auto;padding-right:3px}.char{min-width:0;text-align:center;border:1px solid var(--line);border-radius:11px;padding:8px 4px;background:#202738;position:relative}.char .portrait{font-size:24px}.char .cname{font-size:11px;font-weight:700;min-height:30px;display:flex;align-items:center;justify-content:center}.char .cm{font-size:10px;color:var(--muted)}.char .cost{position:absolute;top:4px;right:5px;color:var(--gold);font-size:10px}.char.picked{opacity:.35;filter:grayscale(1)}.char.banned{opacity:.25;filter:grayscale(1)}.char:not(.picked):not(.banned):hover{border-color:var(--gold);transform:translateY(-1px)}.settings{display:grid;grid-template-columns:1fr 1fr;gap:10px}.checkrow{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.checkrow input{width:auto}.small{font-size:12px;color:var(--muted)}.roundlog{max-height:200px;overflow:auto;display:flex;flex-direction:column;gap:6px}.logitem{padding:7px 9px;border-radius:8px;background:#111621;font-size:12px;color:var(--muted)}.logitem strong{color:var(--text)}.full{grid-column:1/-1}.notice{font-size:12px;color:var(--muted);margin-top:10px}.danger{color:var(--red)}.primary{background:linear-gradient(135deg,#e6bd75,#f3dca8);border:0;color:#171923;font-weight:800}.blue{border-color:#4779a7}.red{border-color:#94545d}.hidden{display:none!important}.footer{color:#768198;text-align:center;font-size:11px;margin:18px 0}.roomline{display:flex;gap:8px;align-items:end}.roomline .field{flex:1}.online{color:var(--green)}.offline{color:var(--red)}@media(max-width:900px){.layout{grid-template-columns:1fr}.roster{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:540px){.wrap{padding:10px}.players{grid-template-columns:1fr}.roster{grid-template-columns:repeat(3,minmax(0,1fr))}.filters{grid-template-columns:1fr 1fr}.filters .field:first-child{grid-column:1/-1}.settings{grid-template-columns:1fr}.title{font-size:21px}}
+@media print{body{background:#10131b}.top-actions,.filters,.controls,.settings-panel,.notice,.footer{display:none!important}.layout{grid-template-columns:1fr}.roster-panel{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <div class="brand"><div class="logo">⚔</div><div><div class="eyebrow">Draft arena · Teyvat</div><div class="title">GENSHIN DUEL DRAFT</div><div class="sub">4 contre 4 · bans alternés · interface OBS</div></div></div>
+ <div class="top-actions"><button id="copyLink">Copier le lien</button><button id="obsMode">Mode OBS : OFF</button><button id="resetBtn">Nouvelle draft</button></div>
+</header>
+<div class="layout">
+ <main class="leftcol">
+  <section class="panel" style="margin-bottom:16px">
+   <div class="section-head"><h2>Salon de duel</h2><span class="pill" id="connectionBadge">MODE LOCAL</span></div>
+   <div class="roomline">
+    <div class="field"><label>Code du salon</label><input id="roomCode" maxlength="12" placeholder="Ex. AB7K2Q"></div>
+    <button id="newRoom">Créer</button><button id="joinRoom">Rejoindre</button>
+   </div>
+   <div class="notice" id="roomHint">Prototype local : le code organise la session sur cet appareil. Pour synchroniser deux ordinateurs à distance, configure Supabase (instructions dans LISEZMOI).</div>
+  </section>
+  <section class="panel" style="margin-bottom:16px">
+   <div class="section-head"><h2>Les équipes</h2><span class="pill" id="phasePill">Phase 1 / 14</span></div>
+   <div class="players">
+    <div class="player p1"><div class="player-head"><div><div class="player-name"><span style="color:var(--blue)">●</span> <span id="name1">Joueur 1</span></div><div class="count" id="score1">Budget : 0 / 30 pts</div></div><button class="blue" id="edit1">Renommer</button></div><div class="slots" id="team1"></div><h3 style="font-size:12px;margin:12px 0 7px">BANNISSEMENTS</h3><div class="bans" id="bans1"></div></div>
+    <div class="player p2"><div class="player-head"><div><div class="player-name"><span style="color:var(--red)">●</span> <span id="name2">Joueur 2</span></div><div class="count" id="score2">Budget : 0 / 30 pts</div></div><button class="red" id="edit2">Renommer</button></div><div class="slots" id="team2"></div><h3 style="font-size:12px;margin:12px 0 7px">BANNISSEMENTS</h3><div class="bans" id="bans2"></div></div>
+   </div>
+   <div class="status" id="status">Joueur 1 : bannissez un personnage.</div>
+   <div class="controls" style="margin-top:10px"><button id="undoBtn">↶ Annuler le dernier choix</button><button id="skipBtn">Passer le tour</button><button id="exportBtn">Exporter le résultat (.txt)</button><button id="shareBtn" class="primary">Copier le résumé</button></div>
+  </section>
+  <section class="panel roster-panel">
+   <div class="section-head"><h2>Roster de personnages</h2><span class="pill" id="rosterCount">0 personnages</span></div>
+   <div class="filters">
+    <div class="field"><label>Rechercher</label><input id="search" placeholder="Nom du personnage…"></div>
+    <div class="field"><label>Élément</label><select id="element"><option value="">Tous</option><option>Pyro</option><option>Hydro</option><option>Anémo</option><option>Électro</option><option>Cryo</option><option>Géo</option><option>Dendro</option><option>Autre</option></select></div>
+    <div class="field"><label>Rareté</label><select id="rarity"><option value="">Toutes</option><option value="5">5 étoiles</option><option value="4">4 étoiles</option></select></div>
+   </div>
+   <div class="small" style="margin-bottom:9px">Clique sur un personnage pour effectuer l'action demandée par la draft. Les coûts et la liste sont modifiables dans les réglages.</div>
+   <div class="roster" id="roster"></div>
+  </section>
+ </main>
+ <aside class="rightcol">
+  <section class="panel settings-panel" style="margin-bottom:16px">
+   <div class="section-head"><h2>Règles & équilibrage</h2><span class="pill">Réglable</span></div>
+   <div class="settings">
+    <div class="field"><label>Bans par joueur</label><input type="number" id="banCount" min="0" max="10" value="3"></div>
+    <div class="field"><label>Picks par joueur</label><input type="number" id="pickCount" min="1" max="8" value="4"></div>
+    <div class="field"><label>Budget par équipe (points)</label><input type="number" id="budget" min="0" max="100" value="30"></div>
+    <div class="field"><label>Coût 5 étoiles</label><input type="number" id="cost5" min="0" max="30" value="5"></div>
+    <div class="field"><label>Coût 4 étoiles</label><input type="number" id="cost4" min="0" max="30" value="2"></div>
+    <div class="field"><label>Limite 5★ par équipe</label><input type="number" id="limit5" min="0" max="8" value="3"></div>
+    <div class="field"><label>Limite par élément (0 = illimité)</label><input type="number" id="limitElement" min="0" max="4" value="2"></div>
+    <div class="field"><label>Ordre du premier tour</label><select id="firstPlayer"><option value="1">Joueur 1 commence</option><option value="2">Joueur 2 commence</option></select></div>
+    <div class="full"><label class="checkrow"><input type="checkbox" id="enforceBudget" checked> Appliquer le budget de points</label><label class="checkrow"><input type="checkbox" id="enforceRarity" checked> Appliquer la limite de 5 étoiles</label><label class="checkrow"><input type="checkbox" id="enforceElement"> Appliquer la limite par élément</label><label class="checkrow"><input type="checkbox" id="showCost" checked> Afficher le coût sur les cartes</label></div>
+   </div>
+   <div class="controls" style="margin-top:12px"><button class="primary" id="applyRules">Appliquer les règles</button><button id="defaultsBtn">Réglages par défaut</button></div>
+   <div class="notice">Les règles sont appliquées aux picks. Les bans alternent jusqu'au nombre choisi, puis les 8 picks alternent. La rareté et les coûts sont des valeurs personnalisées, pas une mesure officielle de puissance.</div>
+  </section>
+  <section class="panel" style="margin-bottom:16px"><div class="section-head"><h2>Historique de la draft</h2><span class="pill" id="historyCount">0 actions</span></div><div class="roundlog" id="history"><div class="logitem">Les actions apparaîtront ici.</div></div></section>
+  <section class="panel"><h2>Raccourcis vidéo</h2><div class="controls"><button id="fullscreenBtn">Plein écran</button><button id="hideSettingsBtn">Masquer réglages</button><button id="copyResult">Copier le résultat</button></div><p class="notice">Astuce OBS : capture une fenêtre de navigateur, puis active « Mode OBS » pour masquer les réglages et agrandir la zone de duel.</p></section>
+ </aside>
+</div>
+<div class="footer">Fan-made, non affilié à HoYoverse. Prototype communautaire ; noms et éléments fournis à titre indicatif.</div>
+</div>
+<script>
+const initialChars = [
+["Aino","Hydro",4],["Albedo","Géo",5],["Alhaitham","Dendro",5],["Aloy","Cryo",5],["Amber","Pyro",4],["Arataki Itto","Géo",5],["Arlecchino","Pyro",5],["Baizhu","Dendro",5],["Barbara","Hydro",4],["Beidou","Électro",4],["Bennett","Pyro",4],["Candace","Hydro",4],["Charlotte","Cryo",4],["Chasca","Anémo",5],["Chevreuse","Pyro",4],["Chiori","Géo",5],["Chongyun","Cryo",4],["Clorinde","Électro",5],["Collei","Dendro",4],["Cyno","Électro",5],["Dahlia","Hydro",4],["Dehya","Pyro",5],["Diluc","Pyro",5],["Diona","Cryo",4],["Dori","Électro",4],["Durin","Pyro",5],["Emilie","Dendro",5],["Escoffier","Cryo",5],["Faruzan","Anémo",4],["Fischl","Électro",4],["Freminet","Cryo",4],["Furina","Hydro",5],["Gaming","Pyro",4],["Ganyu","Cryo",5],["Gorou","Géo",4],["Hu Tao","Pyro",5],["Ifa","Anémo",4],["Ineffa","Électro",5],["Jean","Anémo",5],["Kaedehara Kazuha","Anémo",5],["Kaeya","Cryo",4],["Kachina","Géo",4],["Kamisato Ayaka","Cryo",5],["Kamisato Ayato","Hydro",5],["Kaveh","Dendro",4],["Keqing","Électro",5],["Kinich","Dendro",5],["Kirara","Dendro",4],["Klee","Pyro",5],["Kujou Sara","Électro",4],["Kuki Shinobu","Électro",4],["Lan Yan","Anémo",4],["Layla","Cryo",4],["Lisa","Électro",4],["Lynette","Anémo",4],["Lyney","Pyro",5],["Mavuika","Pyro",5],["Mika","Cryo",4],["Mona","Hydro",5],["Mualani","Hydro",5],["Nahida","Dendro",5],["Navia","Géo",5],["Neuvillette","Hydro",5],["Nilou","Hydro",5],["Ningguang","Géo",4],["Noelle","Géo",4],["Ororon","Électro",4],["Qiqi","Cryo",5],["Razor","Électro",4],["Rosaria","Cryo",4],["Sangonomiya Kokomi","Hydro",5],["Sayu","Anémo",4],["Sethos","Électro",4],["Shenhe","Cryo",5],["Shikanoin Heizou","Anémo",4],["Sigewinne","Hydro",5],["Skirk","Cryo",5],["Sucrose","Anémo",4],["Tartaglia","Hydro",5],["Thoma","Pyro",4],["Tighnari","Dendro",5],["Traveler","Autre",5],["Varesa","Électro",5],["Venti","Anémo",5],["Wanderer","Anémo",5],["Wriothesley","Cryo",5],["Xiangling","Pyro",4],["Xianyun","Anémo",5],["Xiao","Anémo",5],["Xilonen","Géo",5],["Xingqiu","Hydro",4],["Xinyan","Pyro",4],["Yae Miko","Électro",5],["Yanfei","Pyro",4],["Yaoyao","Dendro",4],["Yelan","Hydro",5],["Yoimiya","Pyro",5],["Yun Jin","Géo",4],["Zhongli","Géo",5]
+].map(([name,element,rarity])=>({name,element,rarity,id:name.toLowerCase().replace(/[^a-z0-9]+/g,"-")}));
+const icons={Pyro:"🔥",Hydro:"💧","Anémo":"🌪️","Électro":"⚡",Cryo:"❄️","Géo":"🪨",Dendro:"🌿",Autre:"✨"};
+let rules={banCount:3,pickCount:4,budget:30,cost5:5,cost4:2,limit5:3,limitElement:2,enforceBudget:true,enforceRarity:true,enforceElement:false,showCost:true,firstPlayer:1};
+let state={players:[{name:"Joueur 1",picks:[],bans:[]},{name:"Joueur 2",picks:[],bans:[]}],actions:[],phase:"ban",turn:1,started:false,finished:false};
+let obs=false,hideSettings=false,roomCode="",supabaseClient=null,channel=null,remoteEnabled=false,applyingRemote=false;
+const $=id=>document.getElementById(id);
+function cost(c){return c.rarity===5?Number(rules.cost5):Number(rules.cost4)}
+function allTaken(){return [...state.players[0].picks,...state.players[1].picks,...state.players[0].bans,...state.players[1].bans].map(x=>x.id)}
+function teamCost(p){return p.picks.reduce((s,c)=>s+cost(c),0)}
+function countRarity(p,r){return p.picks.filter(c=>c.rarity===r).length}
+function countElement(p,e){return p.picks.filter(c=>c.element===e).length}
+function phaseLabel(){if(state.finished)return "Draft terminée";if(state.phase==="ban")return `Bannissement ${state.players[0].bans.length+state.players[1].bans.length+1}/${rules.banCount*2}`;return `Pick ${state.players[0].picks.length+state.players[1].picks.length+1}/${rules.pickCount*2}`}
+function activeName(){return state.players[state.turn-1].name}
+function nextTurn(){state.turn=state.turn===1?2:1}
+function actionText(a){return `${a.player===1?state.players[0].name:state.players[1].name} · ${a.type==="ban"?"BANNIT":"CHOISIT"} ${a.char.name}`}
+function log(action){state.actions.push(action)}
+function renderTeams(){
+ for(let i=0;i<2;i++){
+  const p=state.players[i];$(`name${i+1}`).textContent=p.name;$(`score${i+1}`).textContent=`Budget : ${teamCost(p)} / ${rules.budget} pts`;
+  $(`team${i+1}`).innerHTML="";
+  for(let j=0;j<rules.pickCount;j++){const c=p.picks[j];const el=document.createElement("div");el.className="slot"+(c?" filled":"");el.innerHTML=c?`<div class="portrait">${icons[c.element]||"✨"}</div><div class="slot-name">${escapeHtml(c.name)}</div><div class="slot-meta">${c.rarity}★ · ${cost(c)} pts</div>`:`<div class="portrait" style="opacity:.2">＋</div><div class="slot-meta">Pick ${j+1}</div>`;$(`team${i+1}`).appendChild(el)}
+  $(`bans${i+1}`).innerHTML=p.bans.length?p.bans.map(c=>`<span class="ban-chip">⛔ ${escapeHtml(c.name)}</span>`).join(""):'<span class="small">Aucun ban</span>';
+ }
+ $('phasePill').textContent=phaseLabel();$('historyCount').textContent=`${state.actions.length} actions`;
+ $('status').textContent=state.finished?"Draft terminée ! Exportez le résultat ou lancez une nouvelle draft.":`${activeName()} : ${state.phase==="ban"?"bannissez":"choisissez"} un personnage.`;
+ $('undoBtn').disabled=!state.actions.length;$('skipBtn').disabled=state.finished;
+ $('connectionBadge').textContent=remoteEnabled?"SYNCHRONISÉ":"MODE LOCAL";$('connectionBadge').className="pill "+(remoteEnabled?"online":"");
+ $('history').innerHTML=state.actions.length?state.actions.slice().reverse().map(a=>`<div class="logitem"><strong>${escapeHtml(a.player===1?state.players[0].name:state.players[1].name)}</strong> ${a.type==="ban"?"a banni":"a choisi"} <strong>${escapeHtml(a.char.name)}</strong></div>`).join(""):'<div class="logitem">Les actions apparaîtront ici.</div>';
+}
+function renderRoster(){
+ const q=$('search').value.toLowerCase().trim(),el=$('element').value,rarity=$('rarity').value,taken=allTaken();
+ const list=initialChars.filter(c=>(!q||c.name.toLowerCase().includes(q))&&(!el||c.element===el)&&(!rarity||String(c.rarity)===rarity)).sort((a,b)=>a.name.localeCompare(b.name));
+ $('rosterCount').textContent=`${list.length} personnages`;
+ $('roster').innerHTML=list.map(c=>{const disabled=taken.includes(c.id)||!canPick(c,false).ok;let meta=`${c.element} · ${c.rarity}★`;return `<button class="char ${taken.includes(c.id)?(state.players.some(p=>p.bans.some(x=>x.id===c.id))?"banned":"picked"):""}" data-id="${c.id}" ${disabled?'disabled':''}><span class="cost" style="${rules.showCost?'':'display:none'}">${cost(c)}p</span><div class="portrait">${icons[c.element]||"✨"}</div><div class="cname">${escapeHtml(c.name)}</div><div class="cm">${meta}</div></button>`}).join("");
+ document.querySelectorAll(".char").forEach(btn=>btn.addEventListener("click",()=>choose(btn.dataset.id)));
+}
+function canPick(c,show=true){
+ if(state.phase==="ban")return {ok:true};
+ const p=state.players[state.turn-1];
+ if(p.picks.length>=rules.pickCount)return {ok:false,reason:"Cette équipe a déjà le nombre maximal de picks."};
+ if(rules.enforceBudget&&teamCost(p)+cost(c)>rules.budget)return {ok:false,reason:"Budget dépassé pour cette équipe."};
+ if(rules.enforceRarity&&c.rarity===5&&countRarity(p,5)>=rules.limit5)return {ok:false,reason:"Limite de personnages 5★ atteinte."};
+ if(rules.enforceElement&&rules.limitElement>0&&countElement(p,c.element)>=rules.limitElement)return {ok:false,reason:`Limite ${c.element} atteinte.`};
+ return {ok:true};
+}
+function choose(id){
+ if(state.finished)return;
+ const c=initialChars.find(x=>x.id===id);if(!c)return;
+ if(allTaken().includes(c.id))return;
+ if(state.phase==="pick"){const verdict=canPick(c);if(!verdict.ok){$('status').textContent=verdict.reason;return}}
+ const p=state.players[state.turn-1],type=state.phase;
+ if(type==="ban"&&p.bans.length>=rules.banCount){$('status').textContent="Ce joueur a déjà utilisé tous ses bans.";return}
+ if(type==="pick"&&p.picks.length>=rules.pickCount){$('status').textContent="Cette équipe est complète.";return}
+ if(type==="ban")p.bans.push(c);else p.picks.push(c);
+ log({player:state.turn,type,char:c});state.started=true;
+ const totalBans=state.players[0].bans.length+state.players[1].bans.length;
+ const totalPicks=state.players[0].picks.length+state.players[1].picks.length;
+ if(state.phase==="ban"&&totalBans>=rules.banCount*2){state.phase="pick";state.turn=Number(rules.firstPlayer)}
+ else nextTurn();
+ if(state.phase==="pick"&&totalPicks>=rules.pickCount*2)state.finished=true;
+ renderAll();sendRemote();
+}
+function renderAll(){renderTeams();renderRoster()}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function undo(){const a=state.actions.pop();if(!a)return;const p=state.players[a.player-1];if(a.type==="ban")p.bans=p.bans.filter(c=>c.id!==a.char.id);else p.picks=p.picks.filter(c=>c.id!==a.char.id);state.finished=false;state.phase="ban";state.turn=Number(rules.firstPlayer);for(const x of state.actions){if(x.type==="ban"){state.phase="ban";state.turn=x.player===1?2:1;if(state.players[0].bans.length+state.players[1].bans.length>=rules.banCount*2)state.phase="pick"}else{state.phase="pick";state.turn=x.player===1?2:1} }if(state.players[0].bans.length+state.players[1].bans.length>=rules.banCount*2)state.phase="pick";if(state.players[0].picks.length+state.players[1].picks.length>=rules.pickCount*2)state.finished=true;renderAll();sendRemote()}
+function reset(){state={players:[{name:state.players[0].name,picks:[],bans:[]},{name:state.players[1].name,picks:[],bans:[]}],actions:[],phase:"ban",turn:Number(rules.firstPlayer),started:false,finished:false};renderAll();sendRemote()}
+function applyRules(){
+ const read=(id,min,max)=>Math.max(min,Math.min(max,Number($(id).value)||0));
+ rules={banCount:read("banCount",0,10),pickCount:read("pickCount",1,8),budget:read("budget",0,100),cost5:read("cost5",0,30),cost4:read("cost4",0,30),limit5:read("limit5",0,8),limitElement:read("limitElement",0,4),firstPlayer:Number($("firstPlayer").value),enforceBudget:$("enforceBudget").checked,enforceRarity:$("enforceRarity").checked,enforceElement:$("enforceElement").checked,showCost:$("showCost").checked};
+ if(state.started){alert("Les règles ont été mises à jour. Pour changer le nombre de bans ou de picks proprement, lance une nouvelle draft.");}
+ reset();renderAll();sendRemote();
+}
+function defaultRules(){rules={banCount:3,pickCount:4,budget:30,cost5:5,cost4:2,limit5:3,limitElement:2,enforceBudget:true,enforceRarity:true,enforceElement:false,showCost:true,firstPlayer:1};syncInputs();applyRules()}
+function syncInputs(){for(const k of ["banCount","pickCount","budget","cost5","cost4","limit5","limitElement","firstPlayer"])$(k).value=rules[k];for(const k of ["enforceBudget","enforceRarity","enforceElement","showCost"])$(k).checked=rules[k]}
+function summary(){let s=`GENSHIN DUEL DRAFT — ${roomCode||"local"}\\n`;for(let i=0;i<2;i++){const p=state.players[i];s+=`\\n${p.name}\\nPicks: ${p.picks.map(c=>c.name).join(", ")||"—"}\\nBans: ${p.bans.map(c=>c.name).join(", ")||"—"}\\nBudget: ${teamCost(p)}/${rules.budget}\\n`}s+=`\\nRègles : ${rules.banCount} bans/joueur, ${rules.pickCount} picks/joueur, budget ${rules.budget} pts.`;return s}
+function copyText(t){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>alert("Copié !")).catch(()=>prompt("Copie le texte :",t));else prompt("Copie le texte :",t)}
+function saveText(){const blob=new Blob([summary()],{type:"text/plain;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`genshin-duel-${roomCode||"draft"}.txt`;a.click();URL.revokeObjectURL(a.href)}
+function createRoom(){roomCode=Math.random().toString(36).slice(2,8).toUpperCase();$("roomCode").value=roomCode;history.replaceState(null,"",`#${roomCode}`);copyText(location.href);$('roomHint').textContent="Code créé. Dans cette version, le code est partageable mais la synchronisation distante nécessite les identifiants Supabase (voir LISEZMOI)."}
+function joinRoom(){roomCode=$("roomCode").value.trim().toUpperCase();if(!roomCode){alert("Saisis un code de salon.");return}history.replaceState(null,"",`#${roomCode}`);$('roomHint').textContent=`Salon ${roomCode}. Mode local tant que Supabase n'est pas configuré.`}
+function obsMode(){obs=!obs;document.body.classList.toggle("obs",obs);$("obsMode").textContent=`Mode OBS : ${obs?"ON":"OFF"}`;document.querySelectorAll(".settings-panel,.rightcol .panel:nth-child(2)").forEach(e=>e.classList.toggle("hidden",obs));document.querySelector(".roster-panel").classList.toggle("hidden",obs);document.querySelector(".leftcol > .panel:first-child").classList.toggle("hidden",obs);document.querySelector(".leftcol > .panel:nth-child(2)").style.fontSize=obs?"19px":"";document.querySelectorAll(".slot").forEach(e=>e.style.minHeight=obs?"110px":"83px")}
+function setName(i){const n=prompt("Nom du joueur :",state.players[i-1].name);if(n&&n.trim()){state.players[i-1].name=n.trim().slice(0,24);renderAll();sendRemote()}}
+function sendRemote(){if(!channel||!remoteEnabled||applyingRemote)return;channel.send({type:"broadcast",event:"draft-state",payload:{state,rules}})}
+function setupRealtime(){alert("La synchronisation Supabase n'est pas encore activée dans cette version. Suis les étapes du fichier LISEZMOI pour connecter Supabase.");}
+$("search").addEventListener("input",renderRoster);$("element").addEventListener("change",renderRoster);$("rarity").addEventListener("change",renderRoster);
+$("newRoom").onclick=createRoom;$("joinRoom").onclick=joinRoom;$("copyLink").onclick=()=>copyText(location.href);$("resetBtn").onclick=()=>{if(confirm("Recommencer la draft ?"))reset()};$("undoBtn").onclick=undo;$("skipBtn").onclick=()=>{if(!state.finished){log({player:state.turn,type:"skip",char:{name:"Tour passé"}});nextTurn();renderAll();sendRemote()}};$("exportBtn").onclick=saveText;$("shareBtn").onclick=()=>copyText(summary());$("copyResult").onclick=()=>copyText(summary());$("applyRules").onclick=applyRules;$("defaultsBtn").onclick=defaultRules;$("edit1").onclick=()=>setName(1);$("edit2").onclick=()=>setName(2);$("obsMode").onclick=obsMode;$("hideSettingsBtn").onclick=()=>{hideSettings=!hideSettings;document.querySelector(".settings-panel").classList.toggle("hidden",hideSettings);$("hideSettingsBtn").textContent=hideSettings?"Afficher réglages":"Masquer réglages"};$("fullscreenBtn").onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()};
+const hash=location.hash.replace("#","").toUpperCase();if(hash){roomCode=hash;$("roomCode").value=hash}
+syncInputs();state.turn=Number(rules.firstPlayer);renderAll();
+</script>
+</body>
+</html>
